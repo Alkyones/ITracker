@@ -6,3 +6,5 @@ Responsive Finance Tracking Website Using Django &amp; JavaScript For Backend, H
 - Improves user experience and security by using AJAX.
 - Visualizes incomes and expenses using ChartJs.
 - Compatible with all mobile devices and desktops (Used latest Bootstrap 5.1).
+
+![expenses](/preview/expenses.png)
