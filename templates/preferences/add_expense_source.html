@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="container-fluid mt-4">
+  <h5 class="mt-4 mb-4">Add New Value</h5>
+  <hr class="mb-1 me-0">
+  <form action="{% url 'save_income_expense' %}" method="post">
+    {% csrf_token %}
+    <div class="col-md-12">
+      {% include 'partials/_messages.html' %}
+      <div class="input-group">
+        <select name="valueType" class="form-select" id="inputGroupSelect04">
+          <option name="valueType" value="income" selected>Income</option>
+          <option name="valueType" value="expense">Expense</option>
+        </select>
+      </div>
+      <div class="input-group">
+        <input type="text" class="form-control mt-2" name="valueName" id="valueText">
+      </div>
+    </div>
+      <div class="d-grid gap-2 mt-2">
+        <input type="submit" value="Save" class="btn btn-outline-primary submit-btn" id="submit-button">
+    </div>
+  </form>
+</div>
+
+{%endblock%}

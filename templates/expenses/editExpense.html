@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block body%}
+<div class="container-fluid me-0 mt-4">
+    <div class="row">
+        <div class="col-md-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'expenses' %}">Expenses</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Edit Expense</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+
+
+    <div class="card">
+        <div class="card-body">
+            {%include 'partials/_messages.html' %}
+            <form action="{% url 'edit-expense' expense.id %}" method="post">
+                {% csrf_token %}
+                <div class="form-group mb-2 p-2">
+                    <label for="amount">Amount</label>
+                    <input type="number" name="amount" value="{{Exvalues.amount}}" id="amount"
+                        class="form-control form-control-sm ">
+                </div>
+                <div class="form-group mb-2 p-2">
+                    <label for="Amount">Desciption</label>
+                    <input type="text" name="description" value="{{Exvalues.description}}" id="description"
+                        class="form-control form-control-sm mb-2 p-2">
+                </div>
+                <div class="form-group mb-2 p-2">
+                    <label for="category">Category</label>
+                    <select name="category" id="category" class="form-control form-control-sm">
+                        <option value="{{Exvalues.category}}" id="category">{{Exvalues.category}}</option>
+                        {% for category in categories %}
+                        <option value="{{ category.name }}">{{ category.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group mb-2 p-2">
+                    <label for="">Date of Expense</label>
+                    <input type="date" value="{{Exvalues.date |date:'Y-m-d'}}" name="expense-date" id="expense-date"
+                        class="form-control form-control-sm">
+                </div>
+                <div class="d-grid gap-2 mt-5 pt-1">
+                    <input type="submit" value="Save Changes" class="btn btn-outline-primary btn-sm submit-btn"
+                        id="submit-button">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock%}

@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block body%}
+<div class="container mt-4 p-2">
+    <div class="row">
+        <div class="col-md-10">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'incomes' %}">Incomes</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Edit Income</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+</div>
+
+<div class="card">
+    <div class="card-body">
+        {%include 'partials/_messages.html' %}
+        <form action="{% url 'edit-income' income.id %}" method="post">
+            {% csrf_token %}
+            <div class="form-group mb-2 p-2">
+                <label for="amount">Amount</label>
+                <input type="number" name="amount" value="{{Exvalues.amount}}" id="amount" class="form-control form-control-sm ">
+            </div>
+            <div class="form-group mb-2 p-2">
+                <label for="Amount">Desciption</label>
+                <input type="text" name="description" value="{{Exvalues.description}}" id="description" class="form-control form-control-sm mb-2 p-2">
+            </div>
+            <div class="form-group mb-2 p-2">
+                <label for="source">Source</label>
+                <select name="source" id="source" class="form-control form-control-sm">
+                    <option value="{{Exvalues.source_income}}" id="source">{{Exvalues.source_income}}</option>
+                    {% for source in sources %}
+                    <option value="{{ source.source_name }}">{{ source.source_name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group mb-2 p-2">
+                <label for="">Date of Income</label>
+                <input type="date" value="{{Exvalues.date |date:'Y-m-d'}}" name="income-date" id="income-date" class="form-control form-control-sm">
+            </div>
+            <div class="d-grid gap-2 mt-5 pt-1">
+                <input type="submit" value="Save Changes" class="btn btn-outline-primary btn-sm submit-btn" id="submit-button">
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock%} 

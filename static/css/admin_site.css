@@ -1,0 +1,21 @@
+:root{
+    --body-bg: rgb(34, 30, 30);
+    --primary: #a86704;
+    --link-fg: #fff;
+    --selected-row:#5e490733;
+}
+
+
+#header {
+    margin-top:0.2rem;
+    background-color: transparent;
+}
+
+#branding h1 {
+    color: #fff
+}
+
+div.breadcrumbs {
+    background-color: #A86704;
+    color:#fff;
+}

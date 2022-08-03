@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body%}
+<div class="container-fluid mt-3 p-3">
+    <div class="row">
+        <div class="col-md-12">
+            {% include 'partials/_messages.html'%}
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="">Incomes</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Added Incomes</li>
+                </ol>
+            </nav>
+        </div>
+        <div class="col-md-2">
+            <a href="{% url 'add-income' %}" class="btn btn-outline-primary ">Add Income</a>
+        </div>
+        <div class="col-md-12 mt-2">
+                <input type="text"  class="form-control form-control-sm" placeholder="Search..." id="searchBar">
+        </div>
+    </div>
+
+    {% if incomes%}
+    <div class="row">
+        <div class="col-md-8"></div>
+        <div class="col-md-4">
+            
+        </div>
+    </div> 
+    <div class="all-incomes-table mt-4">
+        <table class="table table-stripped table-hover">
+            <thead>
+                <th>Amount ({{currency}})</th>
+                <th>Source</th>
+                <th>Description</th>
+                <th>Date</th>
+                <th></th>
+            </thead>
+            <tbody >
+                {% for income in page_objs %}
+                <tr>
+                    <td>{{income.amount}}</td>
+                    <td>{{income.source_income}}</td>
+                    <td>{{income.description}}</td>
+                    <td>{{income.date}}</td>
+                    <td><a href="{% url 'edit-income' income.id %}" class="btn btn-sm btn-outline-info">Edit</a>
+                   <a href="{% url 'delete-income' income.id %}" class="btn btn-sm btn-outline-danger">Delete</a></td>
+                
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="table-output mt-4">
+        <table class="table table-stripped table-hover">
+            <thead>
+                <th>Amount ({{currency}})</th>
+                <th>Source</th>
+                <th>Description</th>
+                <th>Date</th>
+                <th></th>
+            </thead>
+            <tbody class="table-body">
+                
+            </tbody>
+        </table>
+    </div>
+
+    <div class="row pagination-container">
+        <div class="col-md-10 d-flex align-center">
+            <h6>Showing page {{page_objs.number}} of {{ page_objs.paginator.num_pages}}</h6>
+        </div>
+        <div class="col-md-2">
+            <ul class="pagination mr-1">
+                {% if page_objs.has_previous %}
+                <li {% if page_objs.number == 1 %} class="page-item-active" {%endif%}><a class='page-link' href="?page=1">&laquo; 1</a></li>
+                <li class="page-item"><a class="page-link" href="?page={{page_objs.previous_page_number}}">Previous</a></li>
+                {%endif%}
+                {% if page_objs.has_next %}
+                <li class="page-item"><a class='page-link' href="?page={{page_objs.next_page_number}}">Next</a></li>
+                <li class="page-item"><a class="page-link" href="?page={{page_objs.paginator.num_pages}}">{{page_objs.paginator.num_pages}}</a></li>
+                {%endif%}
+            </ul>
+        </div>
+        </div>
+    </div>
+
+    <script src="{% static 'js/searchIncome.js' %}"></script>
+
+{% endif %}
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'base_auth.html' %}
+{% load static %}
+{% block body %}
+
+<div class="row mt-5">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <div class="card mt-5">
+            <div class="card-body">
+                <div class="card-title">
+                    <h3>Login Itracker</h3>
+                </div>
+                {%include 'partials/_messages.html'%}
+                <form action="{% url 'login' %}" method="post">
+                    {% csrf_token %}
+                    <div class="form-group mt-4 mb-2">
+                        <input type="text" name="username" id="username" class="form-control form-control-lg"
+                            placeholder="Enter your username" autocomplete="Off">
+                    </div>
+                    <div class="form-group mt-4 mb-2">
+                        <input type="password" name="password" id="password" class="form-control form-control-lg Hashed"
+                            placeholder="Enter your password">
+                    </div>
+                    <div class="d-grid gap-2 mt-4">
+                        <input type="submit" value="Login" class="btn btn-outline-primary submit-btn" id="submit-button">
+                    </div>
+                </form>
+                <span>If you don't have an account <a href="{% url 'register' %}">register</a> </span>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-md-3"></div>
+</div>
+{% endblock %}
