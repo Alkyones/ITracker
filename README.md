@@ -20,6 +20,7 @@ Responsive Finance Tracking Website Using Django &amp; JavaScript For Backend, H
 - Category sort is available
 - JavaScript Search option
 - CRUD for records
+- Pagination for compatibility
 
 ![search](/preview/ajaxSearch.png)
 
