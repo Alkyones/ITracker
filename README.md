@@ -8,7 +8,7 @@ Responsive Finance Tracking Website Using Django &amp; JavaScript For Backend, H
 - Compatible with all mobile devices and desktops (Used latest Bootstrap 5.1).
 
 ## Authentication
-![expenses](/preview/ajaxRegister.png =250x250)
+![expenses](/preview/ajaxRegister.png)
 
 - Checks username and email availability.
 - Increased password security acceptance.
