@@ -11,7 +11,7 @@ Responsive Finance Tracking Website Using Django &amp; JavaScript For Backend, H
 ![expenses](/preview/ajaxRegister.png)
 
 - Checks username and email availability.
-- Increased password security acceptance.
+- Increased password strenght acceptance.
 
 ## Expenses/Incomes
 ![listView](/preview/expenses.png)
