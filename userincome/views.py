@@ -64,7 +64,7 @@ def addIncome(request):
 
 def editIncome(request, id):
     sources = Source.objects.all()
-    income = IncomeModel.objects.get(pk=id)
+    income = IncomeModel.objects.get_by_id(id)
     context = {
         'income': income,
         "Exvalues":income,
@@ -94,7 +94,7 @@ def editIncome(request, id):
         return render(request, 'incomes/editIncome.html', context)
 
 def deleteIncome(request, id):
-    income = IncomeModel.objects.get(id=id)
+    income = IncomeModel.objects.get_by_id(id)
     income.delete()
     messages.success(request, 'Successfully deleted income')
     return redirect("incomes")

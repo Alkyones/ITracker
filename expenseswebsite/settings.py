@@ -10,28 +10,21 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
+
 from pathlib import Path
+import json
 import os
-from django.contrib import messages
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+
+CREDENTIALS_DIR = Path(__file__).resolve().parent.parent.parent
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Uncommet for deploying on heroku
-# import django_heroku
-# django_heroku.settings(locals())
-# CSRF_TRUSTED_ORIGINS = ["https://itracksite.herokuapp.com"]
-# MESSAGE_TAGS ={
-#     messages.error : "danger"
-# }
+credentialsFile = Path.joinpath(CREDENTIALS_DIR .parent, 'credentials/itracker.json')
+credentials = json.load(open(credentialsFile))
 
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-+a%yda75s%+sv0%#!()v0u=bxte8*@hmcgo3da9jtmv7*95b#7'
 
-# SECURITY WARNING: don't run with debug turned on in production!
+SECRET_KEY = credentials['secretKey']
 DEBUG = True
 
 ALLOWED_HOSTS = []
@@ -88,11 +81,11 @@ WSGI_APPLICATION = 'expenseswebsite.wsgi.application'
 import os
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get("DB_NAME"),
-        'USER': "postgres",
-        'PASSWORD': "asdwer123",
-        'HOST': os.environ.get("DB_HOST"),
+        'ENGINE': 'djongo',
+        'NAME': credentials['dbName'],
+        'CLIENT': {
+            'host': credentials['dbUrl']
+        }
     }
 }
 
@@ -133,10 +126,9 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-
+    os.path.join(BASE_DIR, 'static'),  # This is for development
 ]
-STATIC_ROOT =  os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # This is for deployment
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field

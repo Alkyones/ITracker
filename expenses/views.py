@@ -2,10 +2,9 @@ from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.core.paginator import Paginator
-
+from bson import ObjectId
 from .models import ExpensesModel,Category
 from userpreferences.models import UserPreferences
-from django.contrib.auth.models import User
 
 import json
 import datetime
@@ -29,7 +28,6 @@ def search_expense(request):
 @login_required(login_url='/authentication/login')
 def index(request):
     expenses = ExpensesModel.objects.filter(user=request.user)
-    
     try:
         pref_currency = UserPreferences.objects.get(user=request.user).currency
     except:
@@ -79,7 +77,8 @@ def addExpense(request):
 
 def editExpense(request, id):
     categories = Category.objects.all()
-    expense = ExpensesModel.objects.get(pk=id)
+    expense = ExpensesModel.objects.get_by_id(id)
+
     context = {
         'expense':expense,
         "Exvalues":expense,
@@ -109,7 +108,7 @@ def editExpense(request, id):
         return render(request, 'expenses/editExpense.html', context)
 
 def deleteExpense(request, id):
-    expense = ExpensesModel.objects.get(id=id)
+    expense = ExpensesModel.objects.get_by_id(id)
     expense.delete()
     messages.success(request, 'Successfully deleted expense')
     return redirect("expenses")
